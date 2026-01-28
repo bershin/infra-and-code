@@ -4,14 +4,28 @@
 # Run from dockerhub base image
 docker run --name <name_of_container> -p <host_port:<container_port> -d <image_name>
 docker run --name my-nginx -p 8080:80 -d nginx
-curl http://localhost:8080
-# From local image
+ - curl http://localhost:8080
+# From local custom image
 docker run --name my-first-custom-container -p 8081:80 -d my-first-nginx-custom-image:v1
 # From dockerhub custom image
 docker run --name nginx-container-2 -p 8082:80 -d 230882/my-first-nginx-custom-image:v2
+# pass environment variable
+docker run --name cmd-env-dev -p 5002:5000 -e APP_ENVIRONMENT=dev -d env-cmd:v2
+# overrite CMD or append entrypoint
+docker run --name ep-3 entrypoint:v1 "bershin"
+# Overrite entrypoint
+docker run --name ep-4 --entrypoint "/bin/sh" entrypoint:v1 -c "echo BUILD YOUR DREAM"
+# Docker to decide a random host port
+docker run --name nginx-container-2 -p 80 -d 230882/my-first-nginx-custom-image:v2
+# Docker fetch exposed container port and decide a random host port
+docker run --name nginx-container-2 -P-d 230882/my-first-nginx-custom-image:v2
 
-=================Build a docker image, tag & push
+=================Build a docker image
 docker build -t my-first-nginx-custom-image:v1 .
+docker build --build-arg NGINX_VERSION=1.28.1 -t nginx_arg:v2 .
+docker build --no-cache -t nginx-run-expose:v2 .
+
+=================tag & push image
 docker tag my-first-nginx-custom-image:v1 230882/my-first-nginx-custom-image:v1
 docker push 230882/my-first-nginx-custom-image:v2 
 ##Require docker login## -> docker login
@@ -21,6 +35,7 @@ docker push 230882/my-first-nginx-custom-image:v2
 docker ps
 # Running and stopped
 docker ps -a
+docker ps --format "table {{.Image}}\t{{.Ports}}"
 # Check the image build status
 docker images
 
@@ -47,6 +62,8 @@ docker rmi -f $(docker images -q)
 docker exec -it nginx-container-2  ls /usr/share/nginx/html/
 # After login
 docker exec -it nginx-container-2 /bin/bash
+# Login as root user
+docker exec --user root -it cont-40 /bin/bash
 
 ============Search image in docker hub using command
 docker search nginx
@@ -67,3 +84,6 @@ docker inspect nginx-container-2 --format='{{.Config.ExposedPorts}}'
 docker inspect nginx-container-2 --format='{{.Config.Image}}'
 docker inspect nginx-container-2 --format='{{.NetworkSettings.Networks.bridge.IPAddress}}'
 docker inspect nginx-container-2 --format='{{ (index (index .NetworkSettings.Ports "80/tcp") 0).HostPort }}'
+
+===========Check log
+docker logs da0d00824406
