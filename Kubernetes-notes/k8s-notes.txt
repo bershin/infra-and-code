@@ -1,0 +1,83 @@
+=========Modes and type
+Standard -> Regional/Zonal, Public/Private, Alpha/Windows
+- Control plane(managed by gke), Nodes & Workloads(Managed by us)
+- Pay per node (cpu/memory/disk)
+Autopilot -> Regional, Public/Private, Alpha/Windows
+- Control plane & Nodes(managed by gke), Workloads(Managed by us)
+- Pay per pod (cpu/memory/ephermaral disk)
+
+Create standard cluster:
+Regional, size=1, autoscalar enabled, provisioning mode: spot, machine type: e2-small(disk)
+Pre-req -> gcloud
+gcloud component update/install
+- gke-gcloud-auth-plugin
+- kubectl
+gcloud component list --filter=kubectl
+# gcloud auth login
+gcloud container clusters get-credentials cluster-1 --region us-central1 --project project-f09e95b2-bc36-4b45-bf4
+kubectl version --output=yaml
+kubectl get nodes -o wide (verify public node or not)
+
+Tools:
+======
+VSCode extn -> kubernetes-templates, https://marketplace.visualstudio.com/items?itemName=lunuan.kubernetes-templates
+https://kubernetes.io/docs/reference/
+https://kubernetes.io/docs/reference/kubernetes-api/
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.35/
+COMMAND
+========
+
+kubectl run pod-demo-test --image=230882/pod-demo:v3
+kubectl create deployment my-deploy --image=230882/deploy-nginx:v1 --replicas=3
+
+kubectl expose pod pod-demo-test --type=LoadBalancer --port=80 --name=nginx-svc
+kubectl expose rs rs-demo --type=LoadBalancer --port=80 --target-port=8080 --name=nginx-svc
+
+kubectl create -f Replicaset.yaml 
+kubectl apply -f .
+kubectl apply -f manifest/
+kubectl apply -f pod.yaml
+
+kubectl get pod
+kubectl get rs
+kubectl get deploy
+kubectl get svc
+kubectl get ds
+kubectl get <resource> -o wide
+kubectl get <resource> <resource-name> -o yaml
+
+kubectl describe pod <pod>
+kubectl describe rs <rs>
+kubectl describe deploy <rs>
+kubectl describe svc nginx-svc
+
+kubectl edit rs nginx-rs
+kubectl edit deploy nginx-deploy
+
+kubectl logs <pod>
+# Live logs, see application error.
+kubectl logs -f <pod>
+
+kubectl exec -it pod-demo-test -- env
+kubectl exec -it pod-demo-test -- ls -l /usr/share/nginx/html/
+kubectl exec -it pod-demo-test -- /bin/sh
+
+kubectl delete pod <pod>
+kubectl delete pod/<pod>
+kubectl delete svc nginx-svc
+kubectl delete svc/nginx-svc
+kubectl delete rs nginx-rs
+kubectl delete deploy my-deploy
+kubectl delete -f Replicaset.yaml
+
+kubectl scale --replicas=3 rs nginx-rs
+kubectl scale --replicas=5 deploy my-deploy
+
+kubectl set image deploy my-deploy deploy-nginx=230882/deploy-nginx:v2
+
+kubectl rollout history deployment my-deploy 
+kubectl rollout history deployment my-deploy --revision=2
+kubectl annotate deployment my-deploy kubernetes.io/change-cause="Inital deploy"
+kubectl rollout undo deployment my-deploy
+kubectl rollout undo deployment my-deploy --to-revision=1
+kubectl rollout restart deployment my-deploy
