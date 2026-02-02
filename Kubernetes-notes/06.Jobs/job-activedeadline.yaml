@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-parallel
+spec:
+  template:
+    spec:
+      containers:
+      - name: counter
+        image: alpine
+        command: ['sh', '-c', 'echo Job Completed; sleep 20']
+      restartPolicy: Never
+  backoffLimit: 4
+  completions: 3
+  parallelism: 2
+  activeDeadlineSeconds: 50

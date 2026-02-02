@@ -19,6 +19,9 @@ docker run --name ep-4 --entrypoint "/bin/sh" entrypoint:v1 -c "echo BUILD YOUR 
 docker run --name nginx-container-2 -p 80 -d 230882/my-first-nginx-custom-image:v2
 # Docker fetch exposed container port and decide a random host port
 docker run --name nginx-container-2 -P-d 230882/my-first-nginx-custom-image:v2
+# Docker run with vollume, volumes & mount are automaticaly created.
+docker run --name my-nginx-vol -p 8080:80 --mount type=volume,source=vol101,target=/myapp1 -d nginx:alpine-slim
+docker run --name=nginx-vol2-doc -p 8082:80 -v vol102:/myapp2 -d nginx:alpine-slim
 
 =================Build a docker image
 docker build -t my-first-nginx-custom-image:v1 .
@@ -87,3 +90,19 @@ docker inspect nginx-container-2 --format='{{ (index (index .NetworkSettings.Por
 
 ===========Check log
 docker logs da0d00824406
+
+############# Volume #################
+
+=======Create named volume 
+docker volume create my-vol
+docker volume ls
+docker volume inspect my-vol
+=======Create anonymous volume 
+docker volume create
+
+=======Remove anonymous volume not used
+docker volume prune
+=======Remove all volume not used
+docker volume prune -a
+======Remove any volume specifically
+docker volume rm my-vol
