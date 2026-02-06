@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-deployment
+spec:
+  selector:
+    matchLabels:
+      app: default
+  template:
+    metadata:
+      labels:
+        app: default
+    spec:
+      containers:
+      - name: default-container
+        image: 230882/ingress-demo-default:v1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-service
+spec:
+  selector:
+    app: default
+  ports:
+  - port: 80
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traffic-router
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    external-dns.alpha.kubernetes.io/hostname: nginx.bjohn.online
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: default-service
+            port:
+              number: 80
+
+
+

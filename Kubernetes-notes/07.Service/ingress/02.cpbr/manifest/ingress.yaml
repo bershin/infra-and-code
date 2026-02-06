@@ -1,0 +1,31 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nginx-ingress
+  annotations:
+    # kubernetes.io/ingress.class: "gce"
+spec:
+  ingressClassName: "gce"
+  defaultBackend:
+    service:
+      name: default-service 
+      port:
+        number: 80
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: app1-service
+                port:
+                  number: 80
+            path: /app1
+            pathType: Prefix  
+          - backend:
+              service:
+                name: app2-service
+                port:
+                  number: 80
+            path: /app2
+            pathType: Prefix  
+---

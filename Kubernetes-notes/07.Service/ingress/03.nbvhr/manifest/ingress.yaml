@@ -1,0 +1,38 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    external-dns.alpha.kubernetes.io/hostname: app.bjohn.online
+    # kubernetes.io/ingress.global-static-ip-name: ADDRESS_NAME
+    networking.gke.io/managed-certificates: managed-cert
+    networking.gke.io/FrontendConfig: my-frontend-config
+spec:
+  defaultBackend:
+    service:
+      name: default-service 
+      port:
+        number: 80
+  rules:
+    - host: app1.bjohn.online
+      http:
+        paths:
+          - backend:
+              service:
+                name: app1-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix  
+    - host: app2.bjohn.online
+      http:
+        paths:
+          - backend:
+              service:
+                name: app2-service
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix  
+---

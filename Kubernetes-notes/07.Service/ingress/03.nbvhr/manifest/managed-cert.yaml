@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+    - app.bjohn.online
+    - app1.bjohn.online
+    - app2.bjohn.online
