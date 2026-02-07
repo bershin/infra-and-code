@@ -86,10 +86,14 @@ kubectl rollout restart deployment my-deploy
 https://iap.googleapis.com/v1/oauth/clientIds/YOUR_OAUTH_CLIENT_ID:handleRedirect
 
 # Self sign ssl
-openssl genrsa -out <server.key> 2048
-# openssl req -new -x509 -key server.key -out server.crt -days 3650
-openssl req -new -key <server.key> -out <server.csr> -subj "/CN=app.bjohn.online"
-openssl x509 -req -days 3650 -in <server.csr> -signkey <server.key> -out <server.crt>
+CERT_NAME="app2"
+openssl genrsa -out ${CERT_NAME}.key 2048
+# openssl req -new -x509 -key ${CERT_NAME}.key -out ${CERT_NAME}.crt -days 3650
+openssl req -new -key ${CERT_NAME}.key -out ${CERT_NAME}.csr -subj "/CN=${CERT_NAME}.bjohn.online"
+openssl x509 -req -days 3650 -in ${CERT_NAME}.csr -signkey ${CERT_NAME}.key -out ${CERT_NAME}.crt
 
+=======Selfsigned
+kubectl create secret tls ${CERT_NAME}-cert --cert=${CERT_NAME}.crt --key=${CERT_NAME}.key
 
-
+========Preshared cert
+gcloud compute ssl-certificates create ${CERT_NAME}-cert --certificate=${CERT_NAME}.crt --private-key=${CERT_NAME}.key
