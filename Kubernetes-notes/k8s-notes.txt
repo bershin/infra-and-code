@@ -81,3 +81,15 @@ kubectl annotate deployment my-deploy kubernetes.io/change-cause="Inital deploy"
 kubectl rollout undo deployment my-deploy
 kubectl rollout undo deployment my-deploy --to-revision=1
 kubectl rollout restart deployment my-deploy
+
+# Redirect uri
+https://iap.googleapis.com/v1/oauth/clientIds/YOUR_OAUTH_CLIENT_ID:handleRedirect
+
+# Self sign ssl
+openssl genrsa -out <server.key> 2048
+# openssl req -new -x509 -key server.key -out server.crt -days 3650
+openssl req -new -key <server.key> -out <server.csr> -subj "/CN=app.bjohn.online"
+openssl x509 -req -days 3650 -in <server.csr> -signkey <server.key> -out <server.crt>
+
+
+

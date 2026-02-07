@@ -22,6 +22,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: default-service 
+  annotations:
+    cloud.google.com/backend-config: '{"default": "my-backend-config"}'
 spec:
   type: NodePort
   selector:

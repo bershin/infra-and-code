@@ -1,9 +1,8 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: app2-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: app2
@@ -14,14 +13,14 @@ spec:
     spec:
       containers:
       - name: app2
-        image: 230882/app2-cpbr:v1
+        image: 230882/ingress-demo-app1:v1
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app2-service 
+  name: app2-service
   annotations:
     cloud.google.com/backend-config: '{"default": "my-backend-config"}'
 spec:
@@ -31,3 +30,4 @@ spec:
   ports:
   - port: 80
     targetPort: 80
+---
