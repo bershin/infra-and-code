@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nocookies-router
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    external-dns.alpha.kubernetes.io/hostname: nocookies.bjohn.online
+spec:
+  defaultBackend:
+    service:
+      name: nocookies-service
+      port:
+        number: 80
+
+---
+

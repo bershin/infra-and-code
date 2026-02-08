@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cookies-router
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    external-dns.alpha.kubernetes.io/hostname: appaffinity.bjohn.online
+spec:
+  defaultBackend:
+    service:
+      name: cookies-service
+      port:
+        number: 80
+
+---
+
