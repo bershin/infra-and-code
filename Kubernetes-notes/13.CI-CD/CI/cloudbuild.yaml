@@ -1,0 +1,64 @@
+# [START cloudbuild - Docker Image Build]
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '-t'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bjohn-ar-us-central/test-ar:$SHORT_SHA'
+  - '.'
+
+# Push the image to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/bjohn-ar-us-central/test-ar:$SHORT_SHA'
+
+# Clone the k8s manifest repository
+- name: 'gcr.io/cloud-builders/git'
+  id: Clone k8s-repo
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    git clone https://x-access-token:$$GITHUB_TOKEN@github.com/bershin/cloud-deploy-repo.git && \
+    cd cloud-deploy-repo && \
+    git checkout candidate && \
+    git config user.email "cloudbuild@$PROJECT_ID.iam.gserviceaccount.com" && \
+    git config user.name "Cloud Build"
+  secretEnv: ['GITHUB_TOKEN']
+
+# Generate the new manifest
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Generate Kubernetes manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    sed "s/GOOGLE_CLOUD_PROJECT/${PROJECT_ID}/g" kubernetes.yaml.tpl | \
+    sed "s/COMMIT_SHA/${SHORT_SHA}/g" > cloud-deploy-repo/kubernetes.yaml
+
+# Push the manifest back
+- name: 'gcr.io/cloud-builders/git'
+  id: Push manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    set -x && \
+    cd cloud-deploy-repo && \
+    git add kubernetes.yaml && \
+    git commit -m "Deploying image us-central1-docker.pkg.dev/$PROJECT_ID/bjohn-ar-us-central/test-ar:${SHORT_SHA}
+    Built from commit ${COMMIT_SHA} of repository myapp1-app-repo" && \
+    git push origin candidate
+  secretEnv: ['GITHUB_TOKEN']
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_ID/secrets/github-token/versions/latest
+    env: 'GITHUB_TOKEN'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

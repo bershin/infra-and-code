@@ -1,0 +1,35 @@
+steps:
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy
+  args:
+  - 'apply'
+  - '-f'
+  - 'kubernetes.yaml'
+  env:
+  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=bj-priv-clus-1'
+
+- name: 'gcr.io/cloud-builders/git'
+  id: Copy to production branch
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    set -x && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)') && \
+    git config user.name "Cloud Build" && \
+    git remote set-url origin https://x-access-token:$$GITHUB_TOKEN@github.com/bershin/cloud-deploy-repo.git && \
+    git fetch origin production && git checkout production && \
+    git checkout $COMMIT_SHA kubernetes.yaml && \
+    git commit -m "Manifest from commit $COMMIT_SHA
+    $(git log --format=%B -n 1 $COMMIT_SHA)" && \
+    git push origin production
+  secretEnv: ['GITHUB_TOKEN']
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/$PROJECT_ID/secrets/github-token/versions/latest
+    env: 'GITHUB_TOKEN'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
