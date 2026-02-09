@@ -97,3 +97,6 @@ kubectl create secret tls ${CERT_NAME}-cert --cert=${CERT_NAME}.crt --key=${CERT
 
 ========Preshared cert
 gcloud compute ssl-certificates create ${CERT_NAME}-cert --certificate=${CERT_NAME}.crt --private-key=${CERT_NAME}.key
+
+=========SSH-KeyGen
+ssh-keygen -t ed25519 -C "bjohn230882@gmail.com"
