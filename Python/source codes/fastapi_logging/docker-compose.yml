@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.10.0
+    container_name: logstash
+    ports:
+      - "5000:5000/udp"
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - logstash

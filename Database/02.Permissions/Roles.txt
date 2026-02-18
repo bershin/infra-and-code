@@ -1,0 +1,155 @@
+Roles is alias for User & Group
+Roles resides in the instance level.
+Roles needs to be nested
+- Create a generic role(hr, sales) that can't login and create role with login and & them to the generic role.
+
+=== Instance level(All database) login, create database/roles.
+SUPERUSER - can do anything (NO)
+CREATEDB - make databases
+CREATEROLE - make more role
+LOGIN - can login into database
+REPLICATION - can be used for replication.
+
+CREATE ROLE hr NOSUPERUSER NOCREATEDB NOLOGIN;
+CREATE ROLE accounting NOSUPERUSER NOCREATEDB NOLOGIN;
+
+# See the roles of the specific users
+SELECT rolname, rolsuper, rolcreatedb, rolcanlogin
+FROM pg_roles
+WHERE rolname IN ('hr', 'accounting');
+or)
+/du
+
+# See all databases
+SELECT datname FROM pg_database;
+or)
+/l
+
+psql -U hr
+psql -U suzy -p 5433 -h localhost -d postgres
+
+CREATE ROLE suzy NOSUPERUSER NOCREATEDB LOGIN PASSWORD 'pass123';
+CREATE USER bobby NOSUPERUSER NOCREATEDB LOGIN PASSWORD 'pass123';
+
+# Server version
+postgres=> SELECT version();
+# Client version
+psql --version
+
+REVOKE ALL ON DATABASE norhwind FROM public;
+
+psql -U suzy -p 5433 -h localhost -d northwind
+<Permissio error>
+GRANT accounting TO suzy;
+GRANT hr TO bobby;
+
+
+=== Database level(Connect to database & create schema/tables/roles)
+GRANT CONNECT ON DATABASE northwind TO accounting;
+GRANT CONNECT ON DATABASE northwind TO hr;
+psql -U suzy -p 5433 -h localhost -d northwind
+northwind=> \q
+
+northwind=> CREATE SCHEMA suzy;
+
+=== Schema level(Create & use particular schema)
+REVOKE ALL ON SCHEMA public FROM public;
+
+northwind=> CREATE SCHEMA suzy;
+<permission error>
+
+GRANT CREATE ON DATABASE northwind TO accounting;
+northwind=> CREATE SCHEMA suzy;
+<Success>
+
+northwind=> CREATE table can_i (id int);
+DROP TABLE can_i
+
+REVOKE ALL ON SCHEMA public FROM public;
+northwind=> CREATE table public.can_i (id int);
+
+GRANT CREATE ON SCHEMA public TO accounting;
+GRANT USAGE ON SCHEMA public TO accounting;
+
+=== Table level(What Operation to be performed on a table)
+Control:
+- SELECT(read rows in table)
+- INSERT(write data to table)
+- UPDTAE(change data in table)
+- DELETE(delete data)
+- TRUNCATE(remove all data at once)
+- REFERENCE(allows user to create foreign key constraints)
+- TRIGGER(create triggers on table)
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO accounting;
+GRANT SELECT ON TABLE employees TO hr;
+GRANT INSERT ON TABLE employees TO hr;
+GRANT UPDATE ON TABLE employees TO hr;
+=== Column level(What Operation to be performed on a specific column)
+Control:
+- SELECT(read the column)
+- INSERT(insert data into column)
+- UPDTAE(update data in column)
+- REFERENCE(permission to refer to a column in foreign keys)
+
+susy@northwind=> SELECT * FROM employees;
+<shows all colums)
+REVOKE SELECT ON ALL TABLES IN SCHEMA public FROM accounting;
+GRANT SELECT (employeeid, lastname, firstname, title, titleofcourtesy, hiredate, country, extension, photo, photopath) 
+ON employees
+TO accounting;
+susy@northwind=> SELECT * FROM employees;
+<permission denied)
+susy@northwind=> SELECT firstname,lastname FROM employees;
+<success>
+=== Row level(Which rows in database can you perform operations on)
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 831 rows>
+GRANT SELECT
+ON TABLE orders
+TO accounting;
+
+ALTER TABLE orders
+ENABLE ROW LEVEL SECURITY;
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 0 rows>
+
+CREATE POLICY accounting_orders ON orders
+FOR SELECT
+TO accounting
+USING (orderdate >= '1998-01-01');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 270 rows>
+susy@north=> SELECT MIN(orderdate) FROM orders;
+min
+---
+1998-01-01
+
+CREATE POLICY accounting_orders_older ON orders
+FOR SELECT
+TO accounting
+USING (orderdate >= '1996-12-31');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 370 rows>
+susy@north=> SELECT MIN(orderdate) FROM orders;
+min
+---
+1996-12-31
+
+DROP POLICY accounting_orders_older ON orders;
+CREATE POLICY accounting_orders_customers ON orders
+AS RESTRICTIVE
+FOR SELECT TO accounting
+USING (customerid LIKE 'A%');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 9 rows>
+susy@north=> SELECT * FROM orders;
+
+
+CREATE POLICY sales_orders ON orders
+FOR UPDATE TO sales
+USING (shippeddate IS NULL);

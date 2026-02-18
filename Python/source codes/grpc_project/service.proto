@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service DataTransfer {
+    rpc SendData (DataRequest) returns (DataResponse);
+}
+
+message DataRequest {
+    string message = 1;
+}
+
+message DataResponse {
+    string status = 1;
+}

@@ -1,0 +1,8 @@
+Basically used to store data.
+- Data Integrity(Restrict user to click and change data)
+- Can handle massive amount of data.
+- Quickly combine different dataset.
+- Automate steps for re-use.
+- Can support data for websites and applications.
+
+Database -> Tables -> Rows(Records) & colums

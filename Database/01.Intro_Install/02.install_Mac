@@ -1,0 +1,19 @@
+Install:
+- PostgreSQL - SQL Engine that stores data and reads queries and return information.
+- PgAdmin - Graphical User Interface for connecting with PostgreSQL
+
+Steps to Install postgres:
+- https://www.postgresql.org/download/
+    - Click "Download the installer"
+- Click and proceed.(uncheck stack builders)
+
+Steps to Install PgAdmin
+- https://www.pgadmin.org/download/
+Note: This will get already installed when you install postgresql.
+
+Open PgAdmin > Select server > Select Database
+- Create Database called "rentaldvd" by right clicking "Databases".
+- Right click the "rentaldvd" database and select "restore" and select the "dvdrental.tar" file.
+    - Before restore switch pre/post & Data option.
+- Right click & select "Query Tool" and write you Query
+    - SELECT * FROM film;
