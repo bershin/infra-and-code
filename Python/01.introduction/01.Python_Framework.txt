@@ -1,0 +1,70 @@
+Why Python is frequently chosen for microservive?
+- Simplicity(clear&reduced code) & redability
+    - Reduce complexity & accelerates development.
+    - Syntax Debug is easier with less code.
+- Versality
+    - web, game, script, ML, DS, etc..
+- Rich ecosystem of libraries and frameworks that allows users to focus on business logics and facilitate rapid development.
+    - Libraries for web frameworks: Flask, Django
+    - HTTP requests: Requests
+    - Data analysis: Pandas, NumPy
+- Python application can be easily containerized using Docker
+    - Allow the python services to run in isolated environment.
+    - Allowing for simple deployment, scaling and management of microserices.
+- Lightweight & Efficient:
+    - Python lightweight nature, combined with its versality, makes it ideal for containerized microservices, ensuring low overhead & high scalability.
+
+What is Web development Framework and its role?
+- Think of framework as a toolbox that makes websites easier.
+    - Instead of doing everything from scratch, like writing code to manage how a website talks to a server, or how pages load etc...
+    - The framework handles those details for you so that you can focus on creating the website features like forms, buttons, employees without worrying about the behind the scenes work.
+- Framework is a collection of libraries, modules & functions that simplifies web development by abstracting low-level details such as protocol handling and thread management.
+- Framework provides a structure way to build web applications, offering pre-build solutions for routing, request handling, security and more...
+
+Popular python Framework?
+- Django, Flask, FastAPI - Each provides different level of abstarction and functionality.
+- Flask & FastAPI is particularly useful for microservices.
+- Django for full scale web development applications.
+
+Real world example of Flask & FastAPI in microservice:
+- Flask:
+    - Micro web framework:
+        - Its minimalistic design keeps the code simple, allows easy expansion through expansion and 3rd party tools.
+        - Provides essential components like routing & request handling while remaining higly extensible.
+    - Key features make it ideal for small scale application: 
+        - Built-in development server
+        - Jinja2 templating
+        - Integerated unit testing support.
+    - Pros for microservices
+        - Lightweight & flexible nature allows developer to implement simple APIs and scale as needed.
+    - Usecases
+        - Netflix & Reddit use to build uServices for handling web traffic and APIs, benefiting from its simplicity & flexibility.
+        - where its minimalistic design helps manage microservices and API efficiently.
+        - Ideal for small-scale applications & simple microservices.
+        - Its lightweight design and ease of use makes it a great choice for quick development.
+- FastAPI:
+    - Speed & Asynchronous support:
+        - Support async requests natively.(Makes it ideal for microservices handling numerous request concurrently) such as real time data applications or distributed systems.
+        - fast API is designed to handle many requests at the same time, makes it ideal for applications that need to process real time data or manage large scale systems like chat apps, live dashboards, and online platforms that saves a lot of users at once.
+        - This means developer to write less code and still getting powerful feature.
+    - Data Validation:
+        - Automatic data validation, reduce no. of bugs and enhancing reliability, crucial for uservice APIs.
+    - Interactive API Documentation:
+        - Generates interactive documentation via Swagger & ReDoc, making it easier to test and visualize APIs during development.
+    - Usecases
+        - Uber & Microsoft for its performance & build-in validation.
+        - FastAPIs async capabilities enable these companies to scale efficiently while managing high-concurrency applications.
+        - This has made fast API the go to best choice for applications requiring high performance, such as realtime data processing and cloud native applications.
+
+FastAPI Vs Flask:
+- Performance
+    - FastAPI - Designed for high performance with native asynchromous support.(compared to NodeJS & Go)
+    - Flask - Better suited for synchronous task but can be extended for async with external libraries.
+- Data validation
+    - FastAPI - Built-in data validation and type checking, reducing bugs.
+    - Flask - Requires explicit validation adding to development overhead.
+- Easy of use & community support
+    - FastAPI - Newer but growing fast with strong documentation & built-in API documentation tools like swagger.
+    - Flask - Has matured and extensive community, offering rich documentation and support.
+- Flask favoured for simplicity and FastAPI for performance-intensive applications.
+

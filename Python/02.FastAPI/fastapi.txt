@@ -1,0 +1,15 @@
+Commmand line to run fastapi webserver
+- pip install "fastapi[standard]"
+- fastapi dev main.py
+
+Run fastapi inside code
+- python 02.unicorn/main.py
+
+Run fastapi in cli with dynamic loading
+- uvicorn main:app --reload
+
+Route Vs Endpoint:
+- Route: /item/{item_id}
+- Path Parameter: {item_id}
+- Endpoint: Route + GET/POST/DELETE
+    - Example: POST + http://127.0.0.1:8000/item/123

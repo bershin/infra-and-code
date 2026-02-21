@@ -1,0 +1,17 @@
+Controls:
+- CREATE: Put object like "table"/"functions" in the schema.
+- USAGE: Look in the schema and see what is present.
+
+northwind=> create table can_i(id int);
+or)
+northwind=> create table public.can_i(id int);
+REVOKE ALL ON SCHEMA public FROM public;
+DROP table can_i
+
+GRANT CREATE ON SCHEMA public TO accounting;
+GRANT USAGE ON SCHEMA public TO accounting;
+GRANT USAGE ON SCHEMA apublic TO hr;
+
+
+==========
+GRANT USAGE ON SCHEMA apublic TO sales;

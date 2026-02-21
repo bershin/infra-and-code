@@ -1,8 +1,0 @@
-pip install "fastapi[standard]"
-fastapi dev main.py
-
-if add uvicorn with custom port
-python 02.unicorn/main.py
-
-
-uvicorn main:app --reload

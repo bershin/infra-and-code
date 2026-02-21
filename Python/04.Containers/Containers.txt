@@ -1,0 +1,53 @@
+What are containers?
+- Containers create a isolated environment where application and their dependencies can run independently of the underlying system.
+- Think of it as a tiny self contained packages that holds everything(libraries&settings) that an application needs to run.
+- This means that developers can move the applications easily from one place to another, whether they are testing it or putting it online.
+- It also means they don't have to worry about things breaking or needing to adjust it for different environments.
+- Containers make it easier, faster, more reliable, and less complicated to get applications up and running.
+
+Why are Containers useful(Docker Advantages)?
+- They ensure
+    - Portability
+        - Docker Containers can run consistently across different environments, from local machines to cloud servers, without modification.
+    - Consistency
+        - By isolating applications, Docker ensures that software runs the same regardless of where it is deployed, eliminating environment discrepancies. 
+    - Faster deployment 
+        - Containers are lightweight(smaller) and can be spun up quickly, significantly reducing deployment times compared to traditional virtual machines(VMs)
+    across different environment making applications easier to manage.
+
+Containers Vs VMs
+- Virtual Machines(Seperate computers): Virtualize the underlying hardware and run a full operating system, which adds overhead, so heavier & slower(boot) and requires significant storage.
+- Containers: Virtualize & share the host operating system, making them lighter and faster to spin up compared to VMs, as they don't require a full OS.
+
+Docker:
+    - A set of tools that help create and run containers.
+    - Leading containerization platform that enables building, deploying & managing applications as containers.
+- Dockerfile: 
+    - Contains step by step instructions to build a docker image.
+    - Define base image, working directory, file to copy, command to run & port to expose.
+- Docker Images:
+    - Blueprints for containers, containing all the necessary dependencies(Code & Settings) for running applications.
+    - the image is a snapshot of everything needed to run an application, all bundled together. Once created they can never be changed(immutable)
+- Docker Daemon:
+    - Background service that does all heavy lifting(build, run & Manages Docker images/containers/objects.
+    - It listens and accept API calls from docker client for create/start/stop containers.
+    - acting as the broker between the containers and the host operating system.
+- Docker Run:
+    - Used to create and run a container from docker image, ensuring the application executes in an isolated environment.
+
+===================================================================
+docker --version
+docker info
+docker build -t myfastapiapp .
+docker run --name myfastapi -d -p 8000:8000 myfastapiapp
+
+docker compose up --build
+docker compose down
+
+# Second way to pass environment while running
+docker run --name myfastapi -e APP_ENV=production -d -p 8000:8000 myfastapiapp
+# Second way to pass environment while running
+vi .env
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+APP_ENV=production

@@ -1,0 +1,64 @@
+Instance level security controls: 
+- login
+- create database/roles
+
+SUPERUSER - can do anything (NOSUPERUSER)
+CREATEDB - make databases
+CREATEROLE - make more role
+LOGIN - can login into database
+REPLICATION - can be used for replication.
+
+# Create user/role§ and assign to generic role
+CREATE ROLE accounting NOSUPERUSER NOLOGIN NOCREATEDB;
+CREATE ROLE hr NOSUPERUSER NOLOGIN NOCREATEDB;
+CREATE USER suzy NOSUPERUSER LOGIN NOCREATEDB password 'pass123';
+CREATE USER bobby NOSUPERUSER LOGIN NOCREATEDB password 'pass123';
+
+# See the roles assigned to the specific users
+SELECT rolname, rolsuper, rolcreatedb, rolcanlogin
+FROM pg_roles
+WHERE rolname IN ('hr', 'accounting', 'suzy', 'bobby');
+or)
+/du
+
+psql -U suzy -p 5433 -h localhost -d northwind
+<sucess>
+# Check whether all users has connect permission to database
+SELECT datname,
+       has_database_privilege('public', datname, 'CONNECT') AS public_connect
+FROM pg_database
+WHERE datname = 'northwind';
+
+# Restrict all user to connect to the database
+REVOKE ALL ON DATABASE norhwind FROM public;
+
+psql -U suzy -p 5433 -h localhost -d northwind
+<fails>
+
+
+GRANT accounting to suzy;
+GRANT hr to bobby;
+# Check role and its members
+SELECT
+    r.rolname AS role_name,
+    m.rolname AS member_name
+FROM
+    pg_auth_members am
+JOIN pg_roles r ON am.roleid = r.oid
+JOIN pg_roles m ON am.member = m.oid
+ORDER BY role_name;
+
+
+=================EXERCISE==============
+CREATE ROLE sales NOCREATEDB NOLOGIN NOSUPERUSER;
+CREATE ROLE jill NOCREATEDB LOGIN NOSUPERUSER password 'pass123';
+GRANT sales TO jill;
+=======================================
+# Change password of user
+ALTER ROLE suzy WITH PASSWORD 'pass456';
+
+
+REVERT:
+=======
+GRANT CONNECT ON DATABASE northwind TO public;
+GRANT ALL PRIVILEGES ON DATABASE northwind TO public;

@@ -1,0 +1,41 @@
+What is microservice?
+- Its a design approach, where an application is composed of small independent services.
+- In a monolotic application there will be one "Business logic" & one "Data access layer", tightly coupled into a single system.
+- In microservice application each service(performs a particular business function) are loosly coupled and has its own databases.
+- Each microservice is a self-contained unit that performs a specific business function.
+
+Key Characteristics of Microservice:
+- Independence: Allows development team to develop and deploy services(specific function) within an application with out affecting entire application.
+- Scalability: Scale only the services with experience more load.
+- Technology diversity: Instead of developing the entire application in one language, each services can be developed on different language based on characteristic of microservice been used of.
+- Resilience: Failure in one service doesn't affect entire application, Each services can be fixed in isolation.
+
+Communication between microservice:
+- http RestAPI
+- RabbitMQ
+- gRPC
+
+Advantages of Microservice archietecture:
+- Fast development & Deployment(Development team for each services can work independently and simultatenously)
+- Improved fast isolation
+- Easier scaling
+- Technology flexibility
+
+Challenges of Microservice archietecture:
+- Increased complexity: Each microservice may have developed in different language and has its own dependency add complexity to the system.
+- Data consistency: In distributed system,Transations span multiple services and each services has its own databases make data consistency not easy.
+- Monitoring & debugging: Complex due to different services and required more sophisticated tools.
+- Network Latency: Could impact latency.
+
+When to use microservices?
+- Frequent update
+- independent scaling
+- Large development team
+
+When to use monolotic approach?
+- For a smaller projects, a monolithic approach might be simpler and more cost effective.
+- So, It is essential to evaluate your project's specific needs before deciding on a microservice architecture.
+
+Overall:
+Microservices architecture involves building software as a collection of independent, loosely coupled services.
+Each service is responsible for a specific function, allowing for scalability and flexibility.

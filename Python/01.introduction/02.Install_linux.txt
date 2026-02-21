@@ -1,0 +1,28 @@
+===Install python and pip(package manager for python):
+Download: https://www.python.org/
+
+check:
+$ python --version
+$ pip --version
+
+# Package to make http request
+$ pip install requests
+$ pip show requests
+$ pip list
+
+====Install VScode:
+
+===Setup virtual environment:
+#####$ pip install virtualenv(older version <3.3)
+- Special tool in Python that helps you to manage different dependencies for your projects in isolated environments without using virtual environments.
+- Every package you install affects all of the projects on your computer. This can lead to conflicts when one project needs a specific version, while another requires a different one.
+
+# Create virtual environment(bjohnenv, is my environment):
+$ python -m venv bjohnenv
+# Activate the environment
+$ source bjohnenv/bin/activate
+$ pip list
+$ pip install requests
+$ pip list
+$ pip freeze > requirements.txt
+$ deactivate
