@@ -1,0 +1,37 @@
+# Find a official nginx image in docker hub and spin a container in forground and check the webpage.
+% docker search nginx / docker search nginx --filter is-official=true
+% docker pull nginx
+% docker run nginx
+% docker ps
+% curl http://localhost
+
+# Spin the nginx container in background and check the webpage.
+% docker run -d nginx
+% docker ps
+% curl http://localhost
+% docker kill <cid/name>
+
+# Spin the nginx container in background and check the webpage in custom port 8080 instead of default nginx port and provide container name.
+% docker run -d -p 8080/80 --name my-nginx nginx
+% docker ps --filter name=my-nginx
+% docker stop $(docker ps -q)
+%curl http://localhost:8080
+
+# Container lifecycle and commands
+Create & start a container
+- docker run <image> = docker create + docker Start
+    - exit 0
+        - docker ps / docker ps -a(ubuntu)
+        - docker exec/inspect/logs -f
+        - docker pause/unpause <cid>
+        - docker stop/kill <cid>
+        - docker rm $(docker ps -aq)
+    - exit 1
+        - docker ps -a
+        - docker log/inspect
+        - docker start <cid> (starts in background)
+    
+Command in container
+
+
+
