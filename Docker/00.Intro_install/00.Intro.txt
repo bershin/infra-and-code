@@ -1,0 +1,39 @@
+1. How we build & deploy application(nodeJS) without containers?
+- Install dependencies NodeJS itself needs. ($ apt install nodejs npm)
+- Install nodeJS itself(specific version) to run our javascript files.(nvm install 20)
+- Install application dependencies through package.json. (npm install)
+- Optional(Build & Compilation for few language like Typescript(npm run build), Java, Go). Not for interpretted language like 
+- Run our application.(node app.js)
+
+- We may work on two application one is compatable in node18 and other on node22(nvm use 18). How do we run & manage the different version in same machine?
+- What if manage multiple application running side by side(Go, Java, nodeJS) have conflict with upstream dependencies.( OpenSSL 1.1, libssl-dev, libcrypto.so)
+    - Applications dynamically link to these shared libraries at runtime.(libssl.so.1.1, libssl.so.3). They do not overwrite each other.
+        - /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+        - /usr/lib/x86_64-linux-gnu/libssl.so.3
+    - OS upgrade breaks one of them.
+
+2. How do containers come into rescue?
+Container encapsulate all the dependencies and configurations necessary to run whatever applications in whatever language.
+- Simplified Setup: (No need to worry about dependencies)
+- Portability: Same container can run on any machine. All you need is the runtime installed in the machine that you are running.
+- Consistent environment: No matter how many times you run, it builds with same setup. The container is build with same set of instruction.
+- isolation: Control over network between containers and host machine are running.
+- Efficient: More effecient than VM because of shared OS.
+- Best resource control: Fine grain cpu & memory and set limit for containers, so it doesn't consumes resource from other container.
+- Easy Scalable application: Can be scaled horizontally. 
+
+3. Containers Vs Virtual Machines:
+- isolation
+    - VM: Strong isolation, Each VM has its own OS, providing complete isolation.
+    - Container: Process-level isolation, Container shares the host OS kernel.
+- Size/Overhead:
+    - VM: Have large footprint because of guest OS and virtual hardware.
+    - Container: Lightweight/minimal overhead as they share the kernel with host OS.
+- Portability:
+    - VM: Less portable because it is tied to specific hypervisor and guest OS configuration.
+    - Container: High Portable, of platform agnostic and run consistently.
+
+4. Docker components:
+- Docker client: Docker CLI, API calls
+- Docker Hosts: Docker daemon, Rest API, Containers, Image cache
+- Image Registry: Docker hub

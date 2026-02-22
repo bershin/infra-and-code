@@ -1,0 +1,5 @@
+Install Docker desktop - Based on mac architecture(x86/arm)
+- https://www.docker.com/products/docker-desktop/
+$ docker --version
+$ docker version
+$ docker run hello-world

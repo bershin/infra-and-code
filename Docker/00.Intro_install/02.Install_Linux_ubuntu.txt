@@ -1,0 +1,10 @@
+Install Docker desktop - Based on mac architecture(x86/arm)
+- https://www.docker.com/products/docker-desktop/
+$ docker --version
+$ docker version
+$ sudo docker run hello-world
+
+$ sudo groupadd docker
+$ sudo useradd -aG docker $USER
+$ newgrp docker 
+$ docker run hello-world
