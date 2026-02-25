@@ -21,7 +21,7 @@
 Create & start a container
 - docker run <image> = docker create + docker Start
     - exit 0
-        - docker ps / docker ps -a(ubuntu)
+        - docker ps(log-lived container) / docker ps -a(ubuntu, short-lived)
         - docker exec/inspect/logs -f
         - docker pause/unpause <cid>
         - docker stop/kill <cid>
@@ -31,7 +31,23 @@ Create & start a container
         - docker log/inspect
         - docker start <cid> (starts in background)
     
-Command in container
+# Build a first container using dockerfile
+vi Dockerfile
+From ubuntu
+CMD ["echo", "Hello World!"]
 
+% docker build .
+% docker images
+% docker run <imgae_id
 
-
+# spin container using nginx 1.27.0 and edit nginx config on run.
+% docker pull nginx:1.27.0
+% docker run --name webserver -p 80:80 nginx:1.27.0
+% docker ps
+% curl http://localhost
+% docker exec -it webserver sh
+-> apt-get update
+-> apt-get install vim
+-> vim /usr/share/nginx/html/index.html
+-> exit
+% curl http://localhost

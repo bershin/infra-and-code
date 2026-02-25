@@ -1,0 +1,29 @@
+? What does Column level security controls:
+- SELECT(read the column)
+- INSERT(insert data into column)
+- UPDTAE(update data in column)
+- REFERENCE(permission to refer to a column in foreign keys)
+
+? Allow only users from accounting group to see only column(employeeid, lastname, firstname, title) from employees table.
+susy@northwind=> SELECT * FROM employees;
+<shows all colums>
+
+REVOKE SELECT ON ALL TABLES IN SCHEMA public FROM accounting;
+
+GRANT SELECT (employeeid, lastname, firstname, title) 
+ON employees
+TO accounting;
+
+susy@northwind=> SELECT * FROM employees;
+<permission denied)
+susy@northwind=> SELECT firstname,lastname FROM employees;
+<success>
+
+? Allow only users from sales group to see only column(contactname, contacttitle, phone) from customer table.
+GRANT UPDATE (contactname, contacttitle, phone) 
+ON customer
+TO sales;
+
+SELECT grantee, table_schema, table_name, column_name, privilege_type
+FROM information_schema.column_privileges
+WHERE table_name = 'employees';

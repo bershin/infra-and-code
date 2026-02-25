@@ -1,0 +1,11 @@
+? What Schema level security controls:
+
+? Allow users in accounting to create schema & list tables. Where as hr group only to list tables
+- By default all are allowed to create tables
+- Check user able to create table
+- Restrict all users to create table and delete the table created.
+- Allow only above users to perform allowed actions
+
+? Allow users in sales to list tables in schema public.
+
+? Check the roles have create & usage permission in public schema

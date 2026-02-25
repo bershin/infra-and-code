@@ -1,0 +1,26 @@
+? What Schema level security controls:
+- CREATE: Put object like "table"/"functions" in the schema.
+- USAGE: Look in the schema and see what is present.
+
+? Allow users in accounting to create schema & list tables. Where as hr group only to list tables
+northwind=> create table can_i(id int);
+or)
+northwind=> create table public.can_i(id int);
+REVOKE ALL ON SCHEMA public FROM public;
+DROP table can_i
+
+GRANT CREATE ON SCHEMA public TO accounting;
+GRANT USAGE ON SCHEMA public TO accounting;
+GRANT USAGE ON SCHEMA public TO hr;
+
+? Allow users in sales to list tables in schema public.
+GRANT USAGE ON SCHEMA public TO sales;
+
+? Check the roles have create & usage permission in public schema
+SELECT nspname AS schema,
+       pg_roles.rolname AS role,
+       has_schema_privilege(pg_roles.rolname, nspname, 'USAGE') AS usage,
+       has_schema_privilege(pg_roles.rolname, nspname, 'CREATE') AS create
+FROM pg_namespace
+CROSS JOIN pg_roles
+WHERE nspname = 'public';

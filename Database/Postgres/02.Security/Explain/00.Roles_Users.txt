@@ -1,0 +1,40 @@
+? What are the security model in postgres same as we have user, group, role & permission in os level?
+PostgreSQL security is built around roles
+- Users and groups are simply roles with different attributes.
+This is different from OS-level security, where users and groups are separate entity types
+- PostgreSQL does not treat users and groups as separate objects like operating systems do.
+- A role can act as a user (if it has LOGIN with password) or as a group (if it does not have LOGIN). 
+- That means Roles can inherit from other roles to behave like user & group relationship.
+
+? Where do this security terms like user, role etc resides in postgres?
+Roles reside at the PostgreSQL cluster (instance) level, not at the individual database level.
+If you back up and restore a single database, roles are not included in that backup.
+To restore roles and users, you must back up and restore the entire PostgreSQL cluster (instance), or 
+- Separately export and recreate the roles
+
+? Best practise to create role?
+Roles should be designed using role nesting (role-based access control).
+- Create a generic role (for example: hr, sales, readonly) that does not have LOGIN.
+This role acts like a group and is granted the required permissions.
+- Create individual user roles with LOGIN.
+- Assign the user roles to the generic (group) roles to inherit permissions.
+This way, user management becomes maintainable. You can add or remove users from a group role instead of granting or revoking permissions individually.
+
+? Six Layers of security in postgres
+Instance level: (Covers all databases), handles can you login(LOGIN), create databases(CREATEDB), create roles(CREATEROLE), etc.
+Database level: Can you connect to database(CONNECT), create schema(CREATE).
+Schema level: who can use particular schemas(USAGE) or create objects in a schema(CREATE).
+Table level: What operation can you perform on a table (SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES)
+Column level: What operation can you perform on specific column.
+Row level - Which rows in databases can you perform operations on.
+
+# Server version
+postgres=> SELECT version();
+# Client version
+psql --version
+
+# See all databases
+SELECT datname FROM pg_database;
+or)
+/l
+

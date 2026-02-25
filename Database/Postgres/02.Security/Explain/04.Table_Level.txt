@@ -1,0 +1,26 @@
+? What does table level security controls:
+- SELECT(read rows in table)
+- INSERT(write data to table)
+- UPDATE(change data in table)
+- DELETE(delete data)
+- TRUNCATE(remove all data at once)
+- REFERENCE(allows user to create foreign key constraints)
+- TRIGGER(create triggers on table)
+
+? Allow users in accounting group to do SELECT on all tables in public schema.
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO accounting;
+GRANT SELECT ON TABLE employees TO hr;
+GRANT INSERT ON TABLE employees TO hr;
+GRANT UPDATE ON TABLE employees TO hr;
+
+? Allow users in sales group to do SELECT in customers table.
+GRANT SELECT ON TABLE customers TO sales;
+GRANT SELECT ON TABLE orders TO sales;
+GRANT SELECT ON TABLE order_details TO sales;
+GRANT INSERT ON TABLE orders TO sales;
+GRANT INSERT ON TABLE order_details TO sales;
+
+? Show roles having list of previlage in employee table.
+SELECT grantee, privilege_type, table_schema, table_name
+FROM information_schema.table_privileges
+WHERE table_name = 'employees';

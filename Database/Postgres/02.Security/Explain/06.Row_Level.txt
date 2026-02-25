@@ -1,0 +1,69 @@
+? Syntax for policy creation
+CREATE POLICY <policy_name>> 
+ON <table_name>>
+FOR SELECT|INSERT|UPDATE|DELETE
+TO <role>
+USING (expression); 
+
+? Create a policy that enables users in group accounting to select only rows that has orderdate >= '1998-01-01' in orders table
+GRANT SELECT ON TABLE orders TO accounting;
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 812 rows>
+
+ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 0 rows>
+
+CREATE POLICY accounting_orders 
+ON orders
+FOR SELECT
+TO accounting
+USING (orderdate >= '1998-01-01');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 270 rows>
+susy@north=> SELECT MIN(orderdate) FROM orders;
+min
+---
+1998-01-01
+
+? Create a policy that enables users in group accounting to select only rows that has orderdate >= '1996-12-31' in orders table
+CREATE POLICY accounting_orders_older 
+ON orders
+FOR SELECT
+TO accounting
+USING (orderdate >= '1996-12-31');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 370 rows>
+susy@north=> SELECT MIN(orderdate) FROM orders;
+min
+---
+1996-12-31
+
+? Remove the policy accounting_orders_older created on order table.
+DROP POLICY accounting_orders_older ON orders;
+
+? Create a policy that enables users in group accounting to select only rows that has customerid starts with 'A' in orders table
+CREATE POLICY accounting_orders_customers 
+ON orders
+AS RESTRICTIVE
+FOR SELECT 
+TO accounting
+USING (customerid LIKE 'A%');
+
+susy@north=> SELECT COUNT(*) FROM orders;
+<shows 9 rows>
+susy@north=> SELECT * FROM orders;
+
+? Create a policy that enables users in group sales to update rows that has shippeddate null in orders table
+CREATE POLICY sales_orders 
+ON orders
+FOR UPDATE 
+TO sales
+USING (shippeddate IS NULL);
+
+? Describe the policies applied on table orders
+SELECT *
+FROM pg_policies
+WHERE tablename = 'orders';

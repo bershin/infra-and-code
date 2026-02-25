@@ -1,0 +1,32 @@
+? What does database level security controls:
+- CREATE: Make new schemas
+- CONNECT: Connect to database.
+- TEMP: Create temporary table.
+
+? Allow hr & accounting group to have permission to connect to northwind database:
+GRANT CONNECT ON DATABASE northwind TO accounting;
+GRANT CONNECT ON DATABASE northwind TO hr;
+
+psql -U suzy -p 5433 -h localhost -d northwind
+northwind=>
+<success>
+
+? Allow users in accounting group to create schema in northwind database not others.
+northwind=> create schema suzy;
+<fail>
+GRANT CREATE ON DATABASE northwind TO accounting;
+northwind=> create schema suzy;
+CREATE SCHEMA
+
+? Grant users(jill) from sales group to connect to northwind database and create schema.
+GRANT CONNECT ON DATABASE northwind TO sales;
+GRANT CREATE ON DATABASE northwind TO sales;
+$ psql -U jill -p 5433 -h localhost -d northwind
+northwind=> create schema jill;
+CREATE SCHEMA
+northwind=> 
+
+? Check whether sales group has connect an create privealge in northwind database?
+SELECT 
+    has_database_privilege('sales', 'northwind', 'CONNECT') AS can_connect,
+    has_database_privilege('sales', 'northwind', 'CREATE') AS can_create;

@@ -1,0 +1,10 @@
+? What does table level security controls:
+
+? Allow users in accounting group to do SELECT on all tables in public schema.
+- Users in hr group to have (select, insert & update) in employees tables.
+
+? Allow users in sales group to do SELECT in customers table.
+- Allow users in sales group to do (SELECT, insert) in orders table.
+- Allow users in sales group to do (SELECT, insert) in order_details table.
+
+? Show roles having list of previlage in employee table.
