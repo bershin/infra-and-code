@@ -1,0 +1,28 @@
+? Install pyenv in mac and check
+
+? Install python version 3.12.7 and make it global
+
+? Confirm the python is using pyenv & it matches the version
+
+? Create virtual environment(.venv) and switch from global to virtual environment(venv) and viceversa
+- create virtual environment (.venv)
+- switch to virtual environment (.venv)
+- Confirm you are in virtual environment
+- switch back to global environment.
+
+? Prove a project can have multiple virtual environment which are independent and isolated. 
+- With in project-x create two virtual environment .venv & .venv1 
+- switch to venv and install boto3 in venv1 environment, validate and exit
+- switch to venv1 and check boto3 is not installed. Upgrade pip, validate and exit
+
+? Delete virtual environment
+
+? Avoid coping virtual environment to Git repository
+
+? How do you ensure you can recreate the virtual environment after you clone the repo which exclude the virtual environment.
+
+? Isolate each project with different python version and its dependencies.
+    - Install python 3.12.7, in Project A with dependencies boto3==1.37.16, requests==2.32.3, pandas==2.2.3
+    - Install python 3.12.9, in Project B with latest of above dependencies
+
+? Priority order pyenv follows:

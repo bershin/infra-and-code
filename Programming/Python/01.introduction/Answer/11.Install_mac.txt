@@ -1,0 +1,159 @@
+? Install pyenv in mac and cjeck
+% brew install pyenv
+% pyenv versions
+* system (set by /Users/berchin/.pyenv/version)
+
+? Install python version 3.12.7 and make it global
+% pyenv install 3.12.7
+% pyenv install 3.12.9
+% pyenv versions
+* system (set by /Users/berchin/.pyenv/version)
+  3.12.7 
+  3.12.9
+% pyenv global 3.12.9
+% cat ~/.pyenv/version
+% pyenv versions     
+  system
+  3.12.7
+* 3.12.9 (set by /Users/berchin/.pyenv/version)
+Note:(local )
+
+? Confirm the python is using pyenv & it matches the version
+% pyenv version
+3.12.7 (set by /Users/berchin/.pyenv/version)
+% which python
+/Users/berchin/.pyenv/shims/python
+% pyenv  which python
+/Users/berchin/.pyenv/versions/3.12.7/bin/python
+% python --version
+Python 3.12.7
+% pyenv version  
+3.12.7 (set by /Users/berchin/.pyenv/version)
+
+? Create virtual environment(.venv) and switch from global to virtual environment(venv) and viceversa
+% python -m venv .venv
+% source .venv/bin/activate  
+% which python
+% deactivate -> switch from virtual to global
+
+? Prove a project can have multiple virtual environment which are independent and isolated. 
+% mkdir project-x && cd project-x 
+% python -m venv .venv
+% source .venv/bin/activate
+% pip install boto3
+% pip list
+Package         Version
+--------------- -----------
+boto3           1.42.57
+botocore        1.42.57
+jmespath        1.1.0
+pip             24.2
+python-dateutil 2.9.0.post0
+s3transfer      0.16.0
+six             1.17.0
+urllib3         2.6.3
+% deactivate
+% python -m venv .venv1    
+% source .venv1/bin/activate
+% pip list                  
+Package Version
+------- -------
+pip     24.2
+% pip install --upgrade pip
+% pip list                 
+Package Version
+------- -------
+pip     26.0.1
+
+? Delete virtual environment
+% rm -rf .venv1
+
+? Avoid coping virtual environment to Git repository
+vi .gitignore
+.venv
+
+? How do you ensure you can recreate the virtual environment after you clone the repo which exclude the virtual environment.
+% pip freeze > requirements.txt
+% deactivate
+% rm -rf .venv1
+% python -m venev .venv
+% source .venv/bin/activate
+% which python
+% pip install -r requirements.txt
+% pip list
+
+? Isolate each project with different python version and its dependencies.
+% mkdir project-a; cd project-a
+% pyenv local 3.12.7 -> Creates ".python-version" file with version in it.
+% cat .python-version
+3.12.7
+% python -m venv .venv
+% python --version
+Python 3.12.7
+% source .venv/bin/activate
+% which python             
+/Users/berchin/github/infra-and-code/Python/project-a/.venv/bin/python
+% python --version
+Python 3.12.7
+% pip install boto3==1.37.16 requests==2.32.3 pandas==2.2.3
+% pip list                                                 
+Package            Version
+------------------ -----------
+boto3              1.37.16
+botocore           1.37.38
+certifi            2026.2.25
+charset-normalizer 3.4.4
+idna               3.11
+jmespath           1.1.0
+numpy              2.4.2
+pandas             2.2.3
+pip                24.2
+python-dateutil    2.9.0.post0
+pytz               2025.2
+requests           2.32.3
+s3transfer         0.11.5
+six                1.17.0
+tzdata             2025.3
+urllib3            2.6.3
+% deactivate; cd ..
+
+% mkdir project-b; cd project-b
+% pyenv local 3.12.9 -> Creates ".python-version" file with version in it.
+% cat .python-version
+3.12.9
+% python -m venv .venv
+% python --version
+Python 3.12.9
+% source .venv/bin/activate
+% which python             
+/Users/berchin/github/infra-and-code/Python/project-a/.venv/bin/python
+% python --version
+Python 3.12.9
+% pip install --upgrade pip
+% pip install boto3 requests pandas
+(.venv) berchin@bjohns-MacBook-Pro project-b % pip list 
+Package            Version
+------------------ -----------
+boto3              1.42.57
+botocore           1.42.57
+certifi            2026.2.25
+charset-normalizer 3.4.4
+idna               3.11
+jmespath           1.1.0
+numpy              2.4.2
+pandas             3.0.1
+pip                24.3.1
+python-dateutil    2.9.0.post0
+requests           2.32.5
+s3transfer         0.16.0
+six                1.17.0
+urllib3            2.6.3
+
+Priority order pyenv follows:
+	1.	Shell override (pyenv shell) → highest priority.
+	2.	Local version file (.python-version) → project-specific.
+        - cd ..; rm .python-version
+	3.	Global version (pyenv global) → default for user.
+        - pyenv global 3.12.9
+        - > ~/.pyenv/version
+	4.	System Python → fallback if nothing else is set.

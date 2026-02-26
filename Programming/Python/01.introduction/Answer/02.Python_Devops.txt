@@ -1,0 +1,39 @@
+? Benefits of using python for automation & Devops tasks:
+1. Readability & Simplicity
+    - Clean syntax resembles English language.
+    - This makes easier to read, write & maintain.
+2. Extensive Standard library
+    - Comes with batteries included.
+    - Modules like (os, sys, subprocess, json, csv) for common devops tasks.
+3. Vast Ecosystem
+    - PyPI host thousands of 3rd party packages.
+    - Libraries like (requests, boto3, PyYAML, pytest) are important for devops.
+4. Cross Platform
+    - Sme script runs consistently on linux, macos, windows makes them portable.
+5. Integeration
+    - Excellent "glue" code.
+    - Easily integerated with other languages, APIs & existing Command-Line tools.
+6. Community
+    - Abundance tutorials & forums.
+    - Prebuild solution for common problems.
+
+? System Python Vs Cpython
+System Python:
+- Comes along with the operating system.
+- Required for system scripts & utilities.
+- Treat it part of OS & avoid installing package into it globally(using, pip).
+Cpython
+- Reference implementation of python written in C.
+- Its downloaded from python.org, homebrew or pyenv.
+
+? Different way of installing Cpython and its advantage
+1. Install from python.org
+- Simple method.
+- Direct way to install in Windows/Mac.
+- Only single version is possible.
+2. OS package manager
+- Using apt,yum,brew.
+- Install single version along with system python.
+- Only single version is possible.
+3. pyenv (recommended)
+- Ideal for managing multiple version of python without touching system python.

@@ -1,0 +1,53 @@
+? REPL: Interactive python programming default(Read Evaluate Print Loop)
+% pyenv global 3.12.9
+% python             
+Python 3.12.9 (main, Feb 26 2026, 10:08:00) [Clang 17.0.0 (clang-1700.0.13.5)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+Cmd click to launch VS Code Native REPL
+>>> 1 + 1
+2
+>>> myvar = "Hello"
+>>> print(myvar)
+Hello
+>>> exit()
+% 
+
+? REPL: Interactive python programming using ipython
+% pip install ipython rich
+% ipython
+Python 3.12.9 (main, Feb 26 2026, 10:08:00) [Clang 17.0.0 (clang-1700.0.13.5)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 9.10.0 -- An enhanced Interactive Python. Type '?' for help.
+Tip: Use `F2` or %edit with no arguments to open an empty editor with a temporary file.
+Cmd click to launch VS Code Native REPL
+
+In [1]: 1 + 1
+Out[1]: 2
+
+In [2]: print("Hello world")
+Hello world
+
+In [3]: ?
+
+In [4]: exit
+%
+
+? Writing & running python files
+vi demo.py
+print(1 + 1)
+
+% python demo.py
+2
+
+? Using JupyterLab notebook for interactive code execution
+% which python (Check you are in virtual environment)
+% pip install jupyterlab
+% pip freeze > requirements.txt
+% jupyter lab
+opens in webbrowser
+shift + Enter -> execute commands
+
+Jupyter in VSCode:
+- Open the ipynb file in vscode editor
+- Select the kernel, which is under the virtual environment for your code to run.
+    - ipython is a dependency to run the command. So install it 
