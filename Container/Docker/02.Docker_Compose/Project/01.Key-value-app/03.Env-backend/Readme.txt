@@ -1,0 +1,5 @@
+- Copy the backend folder
+- Update the compose file with backend.
+- build image before bringing docker up
+    - % docker compose up --build -d
+- Test endpoints using postman
