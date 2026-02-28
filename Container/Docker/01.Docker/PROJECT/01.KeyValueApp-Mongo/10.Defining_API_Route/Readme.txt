@@ -1,0 +1,11 @@
+10. Defining the API Route
+- Create routes folder in src folder and 
+    - create health.js and export
+        - Define the get route for /health & export the module
+    - create store.js and export
+        - Define the post route for /store
+        - Define the get route for /store/:key
+        - Define the put route for /store/:key
+        - Define the delete route for /store/:key
+        - export the module
+- Import the route modules in server.js Use the route

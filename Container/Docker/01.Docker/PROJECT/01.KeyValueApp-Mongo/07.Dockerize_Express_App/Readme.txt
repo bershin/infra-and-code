@@ -1,0 +1,9 @@
+- Create Dockerfile(Dockerfile.dev) in "backend" folder and update
+    - ignore copying "node_module" in docker build
+- build the image & run a container.
+    - % docker build -t key-value-backend:v1 -f Dockerfile.dev .
+    - % docker run -d --rm --name backend --network key-value-network -p 3000:3000 key-value-backend:v1
+- Check logs to see if app was able to connect the db.
+    - % docker logs backend
+- Check the health endpoint using curl
+    - % curl http://localhost:3000/health

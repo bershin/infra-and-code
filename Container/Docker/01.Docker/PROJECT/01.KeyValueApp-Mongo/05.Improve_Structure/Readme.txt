@@ -1,0 +1,4 @@
+- Seperate volume & network variable as seperate environmental file and export the variable.
+- create "setup.sh" file and source the variable.
+- Source the "setup.sh" in "startup.sh" and run.
+- Create a cleanupsh script and remove container,volume,network

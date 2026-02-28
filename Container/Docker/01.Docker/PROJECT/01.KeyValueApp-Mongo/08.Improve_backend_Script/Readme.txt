@@ -1,0 +1,6 @@
+- Copy the start-db.sh to start-backend.sh
+    - start the backend via script.
+- Check logs to see if app was able to connect the db.
+    - % docker logs backend
+- Check the health endpoint using curl
+    - % curl http://localhost:3000/health

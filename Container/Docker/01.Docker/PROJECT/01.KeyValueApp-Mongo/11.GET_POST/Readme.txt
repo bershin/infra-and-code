@@ -1,0 +1,17 @@
+- create a keyvalue.js under src/model
+    - Mongoose to create a schema which has key and value of string type, where key is unique..
+    - Create a model based on that.
+        - Several collection get created once you craete the model in background.
+        - get access to several methods to use to manage key value pairs 
+- import in stores.js
+    - Define the post route for /store
+        - accept request body key, value 
+        - Check if body has key and value, not return 400.
+        - and try catch error.
+            - Check key already exist, if yes return 400
+            - save the key value
+    - Define the get route for /store/:key
+        - accept request param key 
+        - and try catch error.
+            - Check key exist, if not return 400
+            - return 200 with key & value

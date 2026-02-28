@@ -1,0 +1,10 @@
+- Define the put route for /store/:key
+    - get the key from param & value from body
+        - if value missing return 404
+    - update the key with the value
+        - if no update return 400
+        - otherwise 200
+- Define the delete route for /store/:key
+    - get the key from param
+    - if the key doesn't exist return 400
+    - If exists remove the entry and return 204.

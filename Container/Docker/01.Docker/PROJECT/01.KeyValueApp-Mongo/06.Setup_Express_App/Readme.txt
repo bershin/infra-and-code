@@ -1,0 +1,13 @@
+- Create seperate folder "backend"
+    - % mkdir backend; cd backend
+- Install express@4.19.2 mongoose@8.5.1 body-parser@1.20.2 
+    - % npm init -y;
+    - % npm i express@4.19.2 mongoose@8.5.1 body-parser@1.20.2  --save-exact 
+- ignore copying node_module in docker build
+- create & update src/server.js
+    - Setup health endpoint
+    - Connect to db with authentication and timeout.
+    - listen to port 3000
+- update the start in package.json
+    - % npm start
+    - See error while using mogodb hostname.
