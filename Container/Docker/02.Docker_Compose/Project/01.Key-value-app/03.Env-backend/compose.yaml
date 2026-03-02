@@ -11,6 +11,15 @@ services:
     environment:
       - MONGO_HOST=db
       - PORT=3000
+    volumes:
+      - type: bind
+        source: ./backend/src
+        target: /app/src
+    # develop:
+    #   watch:
+    #     - action: sync
+    #       path: ./backend/src
+    #       target: /app/src
     networks:
       - key-value-net
     depends_on:

@@ -2,4 +2,6 @@
 - Update the compose file with backend.
 - build image before bringing docker up
     - % docker compose up --build -d
-- Test endpoints using postman
+    - Test endpoints using postman
+- Enable Hot reloading 
+    - Use either watch or bind volume which ever works for you.

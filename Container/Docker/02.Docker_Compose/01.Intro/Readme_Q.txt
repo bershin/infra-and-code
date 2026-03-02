@@ -6,4 +6,4 @@
 
 ?? Difference between docker-compose Vs docker compose
 
-?? Check docker compose version
+?? Check docker compose version, running, logs 

@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 app.use('/health', healthRouter);
 app.use('/store', storeRouter);
 
-
 // MongoDB connection
 mongoose.connect(`mongodb://${mongoHost}/${process.env.KV_DATABASE || 'key-value-app'}`, {
     auth: {

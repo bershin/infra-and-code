@@ -20,3 +20,19 @@ Standalone docker compose is docker-compose.
 
 ?? Check docker compose version
 % docker compose version
+% docker compose ps -a (reult differs from )
+% docker compose logs -f <backend/db>
+% docker compose start <backend/db>
+% docker compose start
+% docker compose stop <backend/db>
+% docker compose stop
+% docker compose up <backend/db>
+% docker compose up
+% docker compose up --watch
+% docker compose up -d <backend/db>
+% docker compose up -d 
+% docker compose up --build -d 
+% docker compose down
+% docker compose down -v (remove volue as well)
+% docker compose stat
+% docker compose stat <backend/db>
