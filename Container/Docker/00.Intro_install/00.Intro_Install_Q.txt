@@ -1,0 +1,47 @@
+?? How we build & deploy application(nodeJS) without containers?
+    - Process of installing and getting a nodeJS app runing locally in a fresh linux machine.
+    - Challenges is running more than one application each has different need of different version of one language or two different languages in same machine.
+
+?? How do containers come into rescue?
+    - State the features of running application as docker.
+
+
+?? Containers Vs Virtual Machines:
+    - Compare it terms of Design, isolation, overhead & portability.
+
+?? When to use VM?
+
+?? When to use container?
+
+?? Docker components:
+    - 3 main components. Each has sub components.
+    
+?? Explain the steps Running a container from an image
+    - When "docker run" is executed
+
+?? Explain the steps Building & pushing an image
+    - When "docker build" is executed
+    - when "docker tag" or "docker push" is executed.
+
+?? Can I can take a container running on a Linux server and run it directly on a Windows server without any issues?
+
+?? Install Docker desktop - Based on mac architecture(x86/arm)
+    - Run hello-world container
+?? Install Docker desktop - Based on Linux
+    - How to run without sudo.
+
+?? Install Docker desktop - Based on Windows
+    - Install Windows Sub System & pre-request.
+    - Switch from linux to windows 
+    - File creation in linux & seeing in windoes
+    - VSCode. open linux filesystem in vscode.
+        - Open vscode from windows "cmd"
+
+?? Run "docker run hello-world" in docker playground.
+- Try use editor.
+
+?? Install nodejs on mac
+
+?? Install postman on mac
+
+?? Install vscode on mac

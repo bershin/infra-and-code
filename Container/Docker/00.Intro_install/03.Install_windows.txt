@@ -1,27 +1,34 @@
 1. Pre-request
 Via the UI, navigate to the "Start Menu" and search for "Turn Windows feature on or off"
-In the system dialog that will open, tick the box for "Windows Subsystem for Linux"
+    - In the system dialog that will open, tick the box for "Windows Subsystem for Linux"
 
 2. Install Windows subsystem for linux:
 Microsoft app -> install ubuntu -> Set initial username/password
 $ uname -a
 
+
 3. Switch to ubuntu terminal from windows 
 > wsl
 $ echo "hello world" > windows.txt
-$ explorer.exe .
+$ explorer.exe . (See linux filesystem in left panal)
+$ exit
+> 
 
 4. WSL extn in vscode
-- WSL extentionin VSCode switch terminal from cmd to linux shell.
+- "WSL" extentionin VSCode switch terminal from cmd to linux shell.
+- Open via "remote explorer" in vscode itself.
 - "code ." in cmd opens vscode.
 
-5. Install Docker desktop - Based on mac architecture(x86/arm)
+5. Install Docker desktop - Based on WSL Windows architecture(x86/arm)
 - https://www.docker.com/products/docker-desktop/
-$ docker --version
-$ docker version
-$ docker run hello-world
+> docker --version
+> docker version
+> docker run hello-world
 
-6. Things to check
+6. Use Docker in WSL
 Docker desktop > Resource > WSL integeration
 - Check "ubuntu" & "Enable integeration with my default WSL distro"
 - Apply & restart
+> wsl
+$ docker --version
+$ docker run hello-world
