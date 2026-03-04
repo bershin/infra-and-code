@@ -1,5 +1,0 @@
-? Benefits of using python for automation & Devops tasks:
-
-? System Python Vs Cpython
-
-? Different way of installing Cpython and its advantage

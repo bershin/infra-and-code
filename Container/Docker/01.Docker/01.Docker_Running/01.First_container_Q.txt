@@ -1,0 +1,28 @@
+?? Running nginx docker and accessing the default page
+    - Find a official nginx image in docker hub and pull locally.
+    - Spin a container in forground and check the webpage.
+    - Spin the nginx container in background and check the webpage.
+        - Check kill & stop
+    - Use custom port 8080 instead of default nginx port
+
+?? Container lifecycle and commands
+    - Running / Stopped / removed phase.
+    - Running run combination of two state.
+        - start/stop vs kill vs pause
+        - exit 0 Vs exit 1 (restart policies)
+        - logs vs inspect
+?? Run a docker ubuntu and compare with nginx for lifecycle
+    - Give a nginx container a name when running
+    - filter running container by name webserver
+    - Stop all running container
+    - remove all stopped container.
+    - Stop & remove all running container.
+
+?? Build a first container using dockerfile
+    - Use latest ubuntu container that executes a echo command when running and exit.
+
+?? Spin container using nginx 1.27.0 and edit nginx config on run.
+    - run nginx on port 80 in background and name the container.
+        - Hit the url & check the live logs.
+    - Login into the container shell
+        - update the nginx configuration and check the changes.

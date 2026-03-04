@@ -1,3 +1,9 @@
+? Benefits of using python for automation & Devops tasks:
+
+? System Python Vs Cpython
+
+? Different way of installing Cpython and its advantage
+
 ? Install pyenv in mac and check
 
 ? Install python version 3.12.7 and make it global
@@ -26,3 +32,12 @@
     - Install python 3.12.9, in Project B with latest of above dependencies
 
 ? Priority order pyenv follows:
+
+? REPL: Interactive python programming default
+
+? REPL: Interactive python programming using ipython
+
+? Writing & running python files
+
+? Using JupyterLab notebook for interactive code execution
+- Open Jupyter notebook in VSCode

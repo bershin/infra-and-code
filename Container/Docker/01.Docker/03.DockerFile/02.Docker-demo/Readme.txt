@@ -1,8 +1,3 @@
-# Run a docker container from base image and Check the custom website
-docker run --name my-nginx -p 8080:80 -d nginx
-docker ps
-curl http://localhost:8080
-
 # Create a custom image and run docker from the local custom image
 docker build -t my-first-nginx-custom-image:v1 .
 docker run --name my-first-custom-container -p 8081:80 -d my-first-nginx-custom-image:v1

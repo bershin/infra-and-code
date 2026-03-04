@@ -1,8 +1,0 @@
-? REPL: Interactive python programming default
-
-? REPL: Interactive python programming using ipython
-
-? Writing & running python files
-
-? Using JupyterLab notebook for interactive code execution
-- Open Jupyter notebook in VSCode

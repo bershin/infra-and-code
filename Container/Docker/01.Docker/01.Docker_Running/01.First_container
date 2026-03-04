@@ -1,8 +1,12 @@
-# Find a official nginx image in docker hub and spin a container in forground and check the webpage.
+?? Running nginx docker and accessing the default page
+# Find a official nginx image in docker hub 
+https://hub.docker.com/
 % docker search nginx / docker search nginx --filter is-official=true
 % docker pull nginx
-% docker run nginx
-% docker ps
+
+# Spin a container in forground and check the webpage.
+% docker run nginx (Long running process, needs to wait for connection)
+% docker ps (seperate terminal)
 % curl http://localhost
 
 # Spin the nginx container in background and check the webpage.
@@ -17,9 +21,9 @@
 % docker stop $(docker ps -q)
 %curl http://localhost:8080
 
-# Container lifecycle and commands
+?? Container lifecycle and commands
 Create & start a container
-- docker run <image> = docker create + docker Start
+- docker run <image> => docker create + docker Start
     - exit 0
         - docker ps(log-lived container) / docker ps -a(ubuntu, short-lived)
         - docker exec/inspect/logs -f
@@ -30,20 +34,39 @@ Create & start a container
         - docker ps -a
         - docker log/inspect
         - docker start <cid> (starts in background)
-    
-# Build a first container using dockerfile
+
+?? Run a docker ubuntu and compare with nginx for lifecycle
+% docker run ubuntu
+% docker ps -a -> exit 0
+% docker run --name webserver nginx
+^c
+% docker start <nginx>
+% docker ps --filter name=webserver
+% docker stop <nginx>
+% docker ps -a -> exit 0
+% docker rm <ubuntu> <nginx>
+
+% docker stop $(docker ps -q)
+% docker rm $(docker ps -aq)
+% docker rm -f $(docker ps -aq)
+% docker rmi <image>
+% docker rmi $(docker images)
+
+?? Build a first container using dockerfile
 vi Dockerfile
 From ubuntu
 CMD ["echo", "Hello World!"]
 
 % docker build .
 % docker images
-% docker run <imgae_id
+% docker run <imgae_id>
+% 
 
-# spin container using nginx 1.27.0 and edit nginx config on run.
+?? spin container using nginx 1.27.0 and edit nginx config on run.
 % docker pull nginx:1.27.0
 % docker run --name webserver -p 80:80 nginx:1.27.0
 % docker ps
+% docker logs -f webserver
 % curl http://localhost
 % docker exec -it webserver sh
 -> apt-get update
