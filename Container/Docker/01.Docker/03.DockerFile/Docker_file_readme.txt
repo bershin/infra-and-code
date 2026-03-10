@@ -7,3 +7,8 @@ Programmatically define steps for the creation of Docker images.
 - Automation: Remove manual steps & reduce human error.
 - Transparency & Documentation: Should act as a good documentation
 - Optimization: Dockerfiles provide you full control over the build steps, you can tackle into optimization to improve "security" & speed up "build time" and "image size". 
+
+?? CMD vs entrypoint
+    - CMD overites
+    - ENTRYPOINT appends, overrites explicitly
+    - combine CMD & ENTRYPOint

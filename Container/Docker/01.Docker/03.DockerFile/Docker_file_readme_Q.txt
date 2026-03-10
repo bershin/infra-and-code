@@ -22,3 +22,18 @@
     - Write dockerfile and containerize the application
         - Use node:22
         - Demonstrate data loss during"docker stop" and how its not happening in "docker pause"
+?? Reduce the image size
+    - By using alpine image
+        - why intermediate layer doesn't have hash-id
+    - Prove all files in context is copies to the docker host, increase image size and build time.
+        - Which command does context transfer.
+    - How to reduce image size and build time using context copy.
+    - use COPY . . and still reduce size &build time
+    - ignore test.js file in recursive folder.
+    
+?? When inspecting an image with docker history, you see that one RUN layer adds 500 MB to the image size, while the very next RUN layer removes those files and shows a size of only 1 KB. What is the effect on the final image size?
+ 
+?? Run an express app to serve hello world in / route
+    - Change port & app name as environment variable.
+    - Chnage the port with out building image
+    - Chnage the port using file.
