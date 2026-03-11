@@ -8,3 +8,4 @@
 ?? Why considering dependencies is important
     - We need to ignore dev dependencing in running docker.
     - Dev dependency is only required for build
+    - 3 stage build for compiler program like type script.

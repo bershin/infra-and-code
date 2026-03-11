@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          I have been edited new
+          Edit <code>src/App.tsx</code> Production React!!
         </p>
         <a
           className="App-link"

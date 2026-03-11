@@ -8,3 +8,5 @@
 ?? Demo: multistage with express get helloworld with '/'
 - Just use distro to build -> fail
 - Use multistage to do same.
+
+?? Demo: multistage with react get helloworld with '/'
