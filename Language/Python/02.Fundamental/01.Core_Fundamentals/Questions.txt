@@ -1,0 +1,27 @@
+=====Varibles
+?? Assign string to a variable and print
+?? Demo: Prove dynamic typing is allowed in python. How do you find its type?
+
+=======Comment
+?? Single line comment: Where can it be used
+?? Multiline comment: 2 way of using it.
+
+=======Numbers
+?? What numbers are integers & float. How do you check?
+?? Precision in python: 0.1 x 3 = 0.3
+?? Arithmrtic operation
+    - Division always evaluates to float
+    - Other operators
+
+========Strings
+?? What is String
+    - Ways to create a string, Single & multiline strings.
+    - Formating output
+?? Essential String methods
+    - Remove white spaces
+    - Changing case
+    - Start and end 
+    - Split, join & concat
+    - Access character & substring
+    - length of string
+?? String are immutable, prove

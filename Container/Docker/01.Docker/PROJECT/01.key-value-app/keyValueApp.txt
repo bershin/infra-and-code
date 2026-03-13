@@ -1,4 +1,5 @@
-? Build a key-value REST API
+==============About the project===============
+Build a key-value REST API
 - Code a key-value API to store information under specific keys.
 - Run multiple containers for the application & database.
 - Leverage volumes to persist data from the database container.
@@ -24,7 +25,7 @@ DELETE /store/:key
 - if the key exists, delete the key & returns 204.
 GET /health
 - Returns 200 and the text "up"
-
+==============End===============
 01. Running a MongoDB server as docker container
 - Use community-server, Version 7.0.22-ubuntu2204, name container name as "mongodb"
 - Check container is UP & no error in starting database

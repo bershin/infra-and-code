@@ -1,0 +1,126 @@
+==========Roles_Users=============
+?? What are the security model in postgres same as we have in os level like user, group, role & permission?
+
+?? Where do this security terms like user, role etc resides in postgres. Will database backup and restoring in other instance brings back all permission back?
+
+?? Best practise to create role?
+
+?? Six Layers of security in postgres
+
+?? Connect to the postgres database as postgres user and check server version
+    - Check cli client version
+
+?? List all databases in the sql instance using psql command
+
+=============Instance level=================
+?? What does instance level security controls
+
+?? Permissions applied in instance level
+
+?? PostgreSQL privileges are additive (permissive), not restrictive, explain
+
+?? Create a role and add users to it who can login.
+- Create two roles "accounting" and "hr"(group) which doesn't have any permission and can't login.
+    - Check the permission granted to them using sql query.
+    - try login as hr or accounting, it should fails
+- Create suzy with just login permission and set password.
+    - Check the permission granted to them using sql query.
+    - try login, should succeed.
+- Create bobby with just login permission and set password.
+    - Check the permission granted to them using sql query.
+    - try login, should succeed.
+- By default newly created users should not be able to connect to other databases unless granted.
+    - Check whether all users has connect permission to database using sql query.
+    - Restrict access to all users to connect to northwind database when login.
+    - Test login after -> fails
+- Add user to group/rle to inherit permission fro role.
+    - suzy to accounting & bobby to hr.
+    - Check role and its members using sql query.
+
+?? Create sales role and add jill to the role
+
+?? Change password for suzy
+
+?? Allow northwind database to be connected back by all users.
+?? Allow northwind database to be connected back by all users and able to create schemas inside the database
+
+?? Remove john from hr role
+
+?? By default, roles are INHERIT, Create dba role that do not let users to inherit permission, but has permission to create database: 
+- Add john user to dba role and check he can't create db. -> fails
+- Temporarily switches your active role to hr for the current session and create db -> success
+
+?? Remove a role
+
+=============Database level=================
+?? What does database level security controls
+
+?? Allow hr & accounting group to have permission to connect to northwind database:
+    - Test using one of the user in that group by login, example suzy.
+
+?? Allow users in accounting group to create schema in northwind database not others.
+    - Try create schema as suzy user after login -> fails
+    - Grant permission for accounting to create schema in database northwind.
+    - Try as suzy to create schema -> succed
+
+?? Grant users(jill) from sales group to connect to northwind database and create schema.
+
+?? Check whether sales group has connect an create privealge in northwind database?
+=============Schema level=================
+?? What Schema level security controls:
+
+?? Allow users in accounting to create schema & list tables. Where as hr group only to list tables
+- By default all are allowed to create tables
+- Check user able to create table
+- Restrict all users to create table and delete the table created.
+- Allow only above users to perform allowed actions
+
+?? Allow users in sales to list tables in schema public.
+
+?? Check the roles have create & usage permission in public schema
+=============Table level=================
+?? What does table level security controls:
+
+?? Allow users in accounting group to do SELECT on all tables in public schema.
+- Users in hr group to have (select, insert & update) in employees tables.
+
+?? Allow users in sales group to do SELECT in customers table.
+- Allow users in sales group to do (SELECT, insert) in orders table.
+- Allow users in sales group to do (SELECT, insert) in order_details table.
+
+?? Show roles having list of previlage in employee table.
+=============Column level=================
+?? What does Column level security controls:
+
+?? Allow only users(suzy) from accounting group to see only column(employeeid, lastname, firstname, title) from employees table.
+- Check whether user can select all columns in the table
+- Restrict all users from selecting columns in all tables in public schema.
+- Allow only restricted columns 
+    - Try all colums -> fail
+    - Try selected column -> success
+
+?? Allow only users from sales group to see only column(contactname, contacttitle, phone) from customer table.
+
+?? Show roles having list of privelage in employee table on columns.
+=============Row level=================
+?? Syntax for policy creation
+
+?? Create a policy that enables users in group accounting to select only rows that has orderdate >= '1998-01-01' in orders table
+- Check you can select all in orders table and note the COUNT
+    - By default Select is denied for all tables, so grant select for particular group on orders table
+- Enable row level security for orders table.
+    - Same select query says 0 rows.
+- Create the policy and check the count
+    - Verify the minimum order date to confirm.
+
+?? Create a policy that enables users in group accounting to select only rows that has orderdate >= '1996-12-31' in orders table
+    - See this works like Permissive(OR)
+?? Remove the policy accounting_orders_older created on order table.
+
+?? Create a policy that enables users in group accounting to select only rows that has customerid starts with 'A' in orders table
+- Create as restrictive(AND)
+- Check you can select all in orders table and note the COUNT
+
+?? Create a policy that enables users in group sales to update rows that has shippeddate null in orders table
+
+?? Describe the policies applied on table orders
