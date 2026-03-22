@@ -1,0 +1,14 @@
+?? Why use kubernetes. Can't we get container at scale just by docker alone
+
+?? What is kubernetes
+
+?? Kubernetes archietecture
+    - ?? The control Plane
+    - ?? The data Plane
+
+?? The kubectl CLI
+
+========Install
+?? Install kubectl in Mac
+
+?? Install minikube in Mac

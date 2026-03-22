@@ -1,0 +1,85 @@
+=======List
+?? What is list compare with string and usecases
+?? Accessing list: Mutating list
+    - List of same type & mixed type, allowed in python and print.
+    - Specific item from index: Print first element, last element, last before element, index out of range error.
+    - Range of item using start & stop (or) just using one: Print first two element in list | last two element ( 2-ways)
+    - Using third parameter for stepping: Print alternate element in the list
+    - Prove slicing do not alter the original list.
+    - Whats the type after we index & slice.
+?? Modify list content.
+    - Define a list of ports.
+    - Add a port to end of list.
+    - Remove a port anywhere from the list.
+    - insert a port at particulat index.
+    - Remove the last port from the list.
+    - Remove the port from particular index.
+    - How to get help about the method used in list.
+?? Copy argument to function will also mutate the list.(side effect)
+?? Handson:
+    - Create a list('us-east-1', 'eu-west-1', 'ap-southeast-2') and print first target.
+    - Append a string 'us-west-2'
+    - Change the second element to 'eu-central-1'.
+    - Print the list after each step
+
+========Tuples
+?? What is tuples and usecases
+?? Define tuples and check its type and how it gets printed
+    - Use single value and multi value tuples.
+?? Accessing tuples
+    - Using index & slice
+    - what the type after we index & slice
+    - Cannot chage values in a tuple
+?? Hands-on: Create a tuple `service_endpoint` with host name & port
+    - Print hostname & port
+    - Attempt to modify the port and see the error
+
+========Sets
+?? What is Sets and usecases
+?? Define set in two ways.
+    - Sets cannot have mutable elements, prove.
+?? Search a item in a set.
+?? Modifying Set
+    - Add element to set
+    - Remove an element in a set, Safer way, if not exist.
+?? Set operation
+    - print unique elements from two sets.
+    - print common elements of two sets.
+    - print difference in two sets into one.
+    - Print and update common elements of two sets.
+?? Hands-on:
+    - Create a set named 'required' with "python3", "pip", "requests", "boto3", "pip"
+    - Test for membership of 'requests' and 'ansible' strings.
+    - Add 'paramiko' and safely remove 'pip' from the set.
+    - Create another set of strings named 'installed'
+    - Find missing, extra and common packages.
+
+========Dictionary
+?? What is Dictionaty and usecases
+- Define and print dictionary
+- print the length, only keys, only values, items
+    - Prove items return collection of tuples
+    - retrive key & value from items
+    - check a key is part of dictionary
+    - check a value is part of dictionary
+?? Retrive values using key in dictionary, safe method.
+    - Return defaukt value if key not exist.
+?? Add item to a dictionary using inbuild functions
+?? Remove last item from the dictionary.
+?? Remove a particular item from the dictionary.
+
+?? Dictionary operation
+    - Merge and create new dictionary without modify the original dictionary.
+    - Merge and modify the orginal dictionary
+    - Create a new dictionary based on the set of keys.
+    - Clear all the items in dictionary.
+    - Adding items to dictionary
+    - Updating items in dictionary.
+
+?? Hands-on:
+    - Create "server_info" dictionary with keys 'id', 'ip_address', 'state', 'tag'(this is a dict) 
+    - print the server state.
+    - Safely get "instance_type" with default 't2.micro'
+    - Chnage the "state" to "stopped"
+    - Add a new tag to "tags" dictionary
+    - iterate over the dictionary with .items() to display key-value pair.

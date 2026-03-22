@@ -1,0 +1,41 @@
+?? What is Pod
+
+?? Pod lifecycle
+    - ?? Understand how Pods handle container errors:
+        - What is exponentialbackoff
+
+?? Spin you first pod with (nginx:1.27.0) image. see the status and try to connect using ip and hostname, which should fail.
+    - Spin another pod(alpine:3.20) login and connect to nginx pod using ip and hostname.
+    - Check logs on pod or on a specific containers
+    - Delete one containers.
+    - Create a service so that you can connect via hostname, ip & service ip.
+        - Prove recreating pod will not impact connecting via service ip.
+    - Delete pods & service
+
+?? Create an express(express@4.19.2) color web page application and access it deploy it via docker(node:22-alpine3.20) and kubernetes and access
+
+?? Difference between imperative, imperative with config, declarative
+?? Imperative command to create  & delete pod. Create service that route traffic to the pod.
+?? Create first config file for creating nginx pod with image(nginx:1.27.0). listening on port 80.
+    - ?? Imperative way to create a pod using config file
+    - ?? Imperative way to create a service using config file
+    - ?? Test the connection by spining a alpine:3.20  pod using imerative command.
+?? Create config yaml for pod & service using imperative command
+    ?? How does the service know which pod to send the traffic.
+
+?? Limitation of imperative with config files.
+    - ?? Compare what kubernetes look the nginx pod & what we have.
+?? How declarative with config files can overcome the limitation.
+    - ?? How declarative commad works with files and directories
+    - ?? How declarative command looks the difference and apply only the difference.
+    - ?? How to see the last-configuration 
+
+?? Bring Imperative config pod to declarative pod config
+
+?? Define multiple object in sane file
+- Where it is useful
+
+- Imperative approach tells kubernetes "what to do"
+- Config file can be stored in version control(like git) providing a reviewable audit trail and a template for creating new object.
+- Declarative approach tells kubernetes the desired end state. leaving it up to kubernetes to figure out the necessary action to get there.
+- The drawback of imperatibe objectmanagement with configuration file approach is that it does not handles merging changes well. Kubectl replace expects a full object definition and if other controllers have modified the live object(by adding annotation) those changes can be accidentally wiped out.

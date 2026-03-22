@@ -1,0 +1,27 @@
+?? What is functions
+
+?? Define a function to greet user accept string and print with greeting
+    - Write doc string and how to get them.
+
+?? Create a function which generate random number between the input two numbers.
+
+?? Parameters Vs arguments
+    - Positional Arguments Vs Keyword Arguments (demo)
+    - Defaut parameter - Demo
+
+?? Docstring: Demo with check_port
+
+?? Hands-on
+- Recieve a list of user as list and greet each in a function
+- Sum of even numbers, by taking a list of integer and returning a sum of all even numbers.
+- Calculate the first n fibonnaci number
+
+?? Range
+- List of sequencial number Vs Range (Lazy Vs Eager evaluation)
+    - demo by printing the output
+    - Demo size of then and how much time bigger
+- Using range - Three different way 
+
+?? Where to use enumeration
+
+?? Where to use zip

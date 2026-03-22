@@ -1,0 +1,58 @@
+======Conditionals(if/elif/else)
+?? Falsy values
+    - Code to prove it.
+
+?? When "if" condition executes its block of code.
+    - Comparison operators
+    - Combine conditions
+?? Code: "if" to compare server is running. Use list if empty character, not, in and falsy value.
+?? Code: "else" to check cpu usage
+?? Code: elif to check status code
+
+?? What is Guard clauses
+    - Code: Error if not safeguarded.
+    - Code: Safeguard against empty data.
+    - Code: Safeguard to process only of type list or tuples
+
+=====Loops(For/while)
+?? Where to use "for" and "while"
+?? For loop
+    - Code: iterate over list
+    - Code: iterate over a string
+    - Code: print from 0 to 9
+?? While loop
+    - Code: Try when not connected and attempt for 5 before quitting
+
+?? Break / Continue
+    - Code: Find and exit when admin user is found from a list
+    - Code: Skip non yaml file and process only yaml.
+
+=====Comprehension
+?? What is list comprehension
+    - Demo: Double the number from a list and create a new list - traditional & list comprehension.
+    - List comprehension:: Convert the server list to upper case using list comprehension
+    - List comprehension: Store only even numbers from the list into a new list.
+    - list comprehension: correctly filters for files ending in .yml or .yaml and converts their names to lowercase
+    - Set comprehension: Square the unique numbers from list and store it in a set.
+    - Dictionary comprehension: take server name from a list and store with server as key and ip as value in a dictionary.
+    - Dictionary comprehension: take 2 host name from a list and 3 roles from other list store role as key and host as value in a dictionary.
+?? Conditional expression(Ternary operator)
+    - Check each number in a list and say if >8 "play out" or "play in" in a new list.
+    - Check each number in a list pick only the even number and say if >8 "play out" or "play in" in a new list.
+    - A list contains tuples of servername and region. print a dictionary with server name and region as USA or Europe based on region starts with us or eu.
+    - Print the missing package in each environment.
+    - Difference between conditional expression before and after loop
+
+?? Validates a configuration dictionary against a set of rules.
+
+    A valid configuration must have:
+    - Required keys: 'service_name', 'env', 'port'.
+    - 'env' must be one of 'dev', 'staging', 'prod'.
+    - 'service_name' must be a non-empty string.
+    - 'port' must be an integer between 1 and 65535.
+
+    Args:
+        config: A dictionary containing configuration parameters.
+
+    Returns:
+        True if the configuration is valid, False otherwise.

@@ -1,0 +1,88 @@
+?? Can't we get container at scale just by docker alone
+Docker and docker compose alone are just enough for running individual containers or creating development environment. But they do not meet the requirment of production workloads, like
+Container Scheduling
+    - Docker:
+        - Manual assignment of containers to server
+        - Time consuming and error prone.
+    - Kubernetes:
+        - Declarative definition of criteria for node(server) assignment
+        - Handled automatically by kubernetes based on resource definition.
+Load balancing:
+    - Docker:
+        - No build-in load balacing
+    - Kubernetes:
+        - Services provide build-in load balancing across pod.
+Scaling Application:
+    - Docker:
+        - Lack automation for horizontal scaling.
+        - Require low-level adjustments for directing load to newly created containers.
+    - Kubernetes:
+        - Horizontal pod autoscalar can scale pods horizontally and automatically through real time metrics.
+Self-healing:
+    - Docker:
+        - Lacks automation for detecting and restarting unhealthy workloads.
+        - restart policy looks for exit status not the crash.
+    - Kubernetes:
+        - Health check and continious monitoring allows for considerably more robost self-healing mechanism.
+Service-discovery:
+    - Docker:
+        - No build-in solution for service discovery at scale.
+    - Kubernetes:
+        - Internal DNS allows for robust service discovery mechanism through services.
+Configuration-Management:
+    - Docker:
+        - Requires low-level configuration and adjustments and can become cumbersome for large application and multiple environments.
+    - Kubernetes:
+        - Configuration maps and secrets allows decoupling and scaling of application configuration.
+
+?? What is kubernetes, understanding goals, features and archietecture of kubernetes.
+Open-source tool: Standard for container orchestration. 
+    - Kubernetes is designed to easily extensible as a result the k8s ecosystem has grown to thousands of different tool.
+Goal: Address the complexity of running container in production.
+    - Automation: Reduce the need of manual intervention in deploying and managing applications.
+    - Declarative: Declare the final desired state and let kubernetes figure out how to get there.
+    - Scalability: Effortlessly scales applications horizontally to meet demands.
+    - Resilience: Ensure that applications are always available even in the face of failures.
+Components: K8s cluster has many components and they are either placed in the control plane or in worker node.
+    - Control plane: Brain of cluster, Containing the components responsible for managing the entire system.
+    - Worker node: They are the machines where your application actually run.
+
+?? Kubernetes archietecture
+- Kubernetes cluster
+    - Control plane(Master nodes) - Components:
+        - API server: Exposes k8s API, Main Entry point for all admin task(kubectl, dashboard etc)
+        - Scheduler: responsible to place pod on server(resource available and other contraint)
+        - ETCD: Store all cluster data as key-value(configuration & state)
+        - Cloud Controller manager(optional): Enable k8s to interact with underlying cloud infrastructure(LB,node,storage creation)
+        - Controller Manager: Responsible for running controller process that handle routine tasks(replicaset, node, job)
+    - Data plane(Worker nodes):
+        - Container runtime.
+            - Docker, containerd, cri-o
+            - Responsible for running container on each node.
+        - Kubelet: 
+            - Agent running on all worker node.
+            - Communicates with control plane.
+            - Its job is to ensure container in pod are running as per spec.
+        - kubeproxy
+            - Manage network rules on each worker nodes.
+            - Maintain network connectivity and load balancing for service.
+            - Ensure requests are routed to the appropiate pods.
+        - Other k8s object(optional)
+            - pods
+
+========Install
+?? Install kubectl in Mac
+    - brew install kubectl
+        - brew uninstall kubectl
+    - https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/
+        - Download specific version using curl
+        - Chod +x kubectl; mv kubectl /usr/local/bin
+        - kubectl version
+?? Install minikube in mac
+    - brew install minikube
+    - https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Farm64%2Fstable%2Fbinary+download
+        - Download & install
+        - minikube start/stop/delete
+            - % minikube start --kubernetes-version=v1.35.0
+        - kubectl version -> shows server & client version.
+        - kubectl config current-context

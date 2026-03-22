@@ -25,3 +25,6 @@
     - Access character & substring
     - length of string
 ?? String are immutable, prove
+
+========Hands-on
+?? Calculate disk usage by providing all predefined value. Print in 2 decimal with percentage.
